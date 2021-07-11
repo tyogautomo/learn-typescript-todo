@@ -19,10 +19,19 @@ const App: React.FC = () => {
     ]);
   }
 
+  const onDeleteTodo = (id: number) => () => {
+    setTodos(prevTodos => {
+      const prev = [...prevTodos];
+      const idx = prev.findIndex(todo => todo.id === id);
+      prev.splice(idx, 1);
+      return prev;
+    })
+  }
+
   return (
     <div className="App">
       <TodoInput addHandler={todoAddHandler} />
-      <TodoList items={todos} />
+      <TodoList items={todos} onDeleteTodo={onDeleteTodo} />
     </div>
   );
 }
